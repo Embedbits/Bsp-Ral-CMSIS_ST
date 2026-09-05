@@ -1,44 +1,42 @@
-# STM32 CMSIS Device MCU Component
+# STM32CubeU5 CMSIS Device MCU Component
 
-This repository contains a collection of CMSIS (Cortex Microcontroller Software Interface Standard) components provided by STMicroelectronics, integrated and organized for easier usage in embedded projects.
+![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/cmsis_device_u5.svg?color=brightgreen)
 
-## Overview:
-This repository consolidates CMSIS and device-specific components for multiple STM32 families
-into a single repository. It is designed to organize and manage STM32 device headers, startup
-files, and middleware components in a structured and maintainable way.
+## Overview
 
-## Branch Structure:
-- master
-  The main branch containing the baseline structure and shared components.
+**STM32Cube** is an STMicroelectronics original initiative to ease the developers life by reducing efforts, time and cost.
 
-- STM32<FAMILY>
-  Each STM32 family (e.g., STM32U5, STM32G4, STM32H7) has its own branch derived from master.
-  These branches contain device-specific CMSIS files and initialization templates.
+**STM32Cube** covers the overall STM32 products portfolio. It includes a comprehensive embedded software platform delivered for each STM32 series.
+   * The CMSIS modules (core and device) corresponding to the ARM(tm) core implemented in this STM32 product.
+   * The STM32 HAL-LL drivers, an abstraction layer offering a set of APIs ensuring maximized portability across the STM32 portfolio.
+   * The BSP drivers of each evaluation, demonstration or nucleo board provided for this STM32 series.
+   * A consistent set of middleware libraries such as RTOS, USB, FatFS, graphics, touch sensing library...
+   * A full set of software projects (basic examples, applications, and demonstrations) for each board provided for this STM32 series.
 
-- STM32<FAMILY>_<MAJOR>.<MINOR>.x
-  Release branches for each family, derived from the respective STM32<FAMILY> branch.
-  Example: STM32U5_1.5.x corresponds to major release 1.5 for the STM32U5 family.
+Two models of publication are proposed for the STM32Cube embedded software:
+   * The monolithic **MCU Package**: all STM32Cube software modules of one STM32 series are present (Drivers, Middleware, Projects, Utilities) in the repository (usual name **STM32Cubexx**, xx corresponding to the STM32 series).
+   * The **MCU component**: each STM32Cube software module being part of the STM32Cube MCU Package, is delivered as an individual repository, allowing the user to select and get only the required software functions.
+   
+## Description
 
-- STM32<FAMILY>_<MAJOR>.<MINOR>.<PATCH>
-  Minor release branches derived from the major release branch.
-  Example: STM32U5_1.5.2 derives from STM32U5_1.5.x and represents patch release 1.5.2.
+This **cmsis_device_u5** MCU component repo is one element of the STM32CubeU5 MCU embedded software package, providing the **cmsis device** part.
 
-## Usage Guidelines:
-1. Clone the repository and checkout the desired STM32 family branch.
-2. For development or bug fixes, work in a minor release branch derived from the appropriate
-   major release branch.
-3. Include headers and link against the CMSIS/Device files relevant to your target MCU.
-4. Follow release branch conventions to ensure compatibility and traceability.
+## Release note
 
-Notes:
-- Each STM32 family branch serves as a baseline for multiple releases.
-- Major releases (x.y.x) may include API changes, while minor/patch releases should be
-  backward-compatible.
-- Keep the master branch clean; only merge family branches after verification.
+Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/cmsis_device_u5/blob/main/Release_Notes.html).
 
----
+## Compatibility information
 
-## License:
+In this table, you can find the successive versions of this CMSIS Device component, in-line with the corresponding versions of the full MCU package:
 
-This repository consolidates components from STMicroelectronics CMSIS packages.
-Individual components retain their respective licenses. Refer to each folder for details.
+CMSIS Device U5 | CMSIS Core | Was delivered in the full MCU package
+--------------- | ---------- | -------------------------------------
+Tag v1.0.0 | Tag v5.6.0_cm33 | Tag v1.0.0
+
+
+The full **STM32CubeU5** MCU package is available [here](https://github.com/STMicroelectronics/STM32CubeU5).
+
+## Troubleshooting
+If you have any issue with the **Software content** of this repo, you can [file an issue on Github](https://github.com/STMicroelectronics/cmsis_device_u5/issues/new).
+
+For any other question related to the product, the tools, the environment, you can submit a topic on the [ST Community/STM32 MCUs forum](https://community.st.com/s/topic/0TO0X000000BSqSWAW/stm32-mcus).
