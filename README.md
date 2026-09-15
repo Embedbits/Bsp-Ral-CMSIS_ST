@@ -1,77 +1,38 @@
-# Bsp-Ral-CMSIS_ST
+# STM32CubeH5 CMSIS Device MCU Component
 
-Mirror of STMicroelectronics' **CMSIS Device Interface** package (`cmsis-device-<family>`), providing device-specific headers, register definitions and system/startup declarations for one STM32 family at a time. Consumed as a git submodule of [Bsp-Ral](https://github.com/Embedbits/Bsp-Ral), one branch per STM32 family/release.
-
----
+![latest tag](https://img.shields.io/github/v/tag/STMicroelectronics/cmsis_device_h5.svg?color=brightgreen)
 
 ## Overview
 
-| | |
-|---|---|
-| **Upstream project** | `STMicroelectronics/cmsis-device-<family>` (e.g. [cmsis-device-g4](https://github.com/STMicroelectronics/cmsis-device-g4)) |
-| **Role in Bsp-Ral** | Header-only dependency — provides the per-MCU device headers used by `RAL_ST` and by the parent build's MCU-define resolution |
-| **License** | See [`License.md`](License.md), unchanged from upstream |
-| **Maintenance model** | Mirrored from upstream per family; not modified locally |
+**STM32Cube** is an STMicroelectronics original initiative to ease the developers life by reducing efforts, time and cost.
 
-> ⚠️ This repository tracks STMicroelectronics' official CMSIS device sources verbatim. Do not edit its contents directly — device-independent logic belongs in `RAL_ST/Port` instead.
+**STM32Cube** covers the overall STM32 products portfolio. It includes a comprehensive embedded software platform delivered for each STM32 series.
+   * The CMSIS modules (core and device) corresponding to the ARM(tm) core implemented in this STM32 product.
+   * The STM32 HAL-LL drivers, an abstraction layer offering a set of APIs ensuring maximized portability across the STM32 portfolio.
+   * The BSP drivers of each evaluation, demonstration or nucleo board provided for this STM32 series.
+   * A consistent set of middleware libraries such as FileX, USBX, TheadX ...
+   * A full set of software projects (basic examples, applications, and demonstrations) for each board provided for this STM32 series.
 
----
+Two models of publication are proposed for the STM32Cube embedded software:
+   * The monolithic **MCU Package**: all STM32Cube software modules of one STM32 series are present (Drivers, Middleware, Projects, Utilities) in the repository (usual name **STM32Cubexx**, xx corresponding to the STM32 series).
+   * The **MCU component**: each STM32Cube software module being part of the STM32Cube MCU Package, is delivered as an individual repository, allowing the user to select and get only the required software functions.
+   
+## Description
 
-## Branch Structure
+This **cmsis_device_h5** MCU component repo is one element of the STM32CubeH5 MCU embedded software package, providing the **cmsis device** part.
 
-| Branch pattern | Purpose |
-|---|---|
-| `STM32<family>` (e.g. `STM32G4`, `STM32U5`, `STM32H7`) | Family branch holding CMSIS device headers for that STM32 family |
-| `STM32<family>_<major>.<minor>.x` (e.g. `STM32G4_1.2.x`) | Release branch mirroring one specific ST release for that family |
+## Release note
 
----
+Details about the content of this release are available in the release note [here](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/cmsis_device_h5/blob/main/Release_Notes.html).
 
-## Repository Structure
+## Compatibility information
 
-```
-CMSIS_ST
-├── Include
-│   ├── stm32g4xx.h          # Family dispatcher — selects the exact per-part header
-│   ├── stm32g411xb.h        # Per-part-number device header (register/interrupt definitions)
-│   ├── stm32g411xc.h
-│   ├── stm32g414xx.h
-│   ├── ...                  # One header per part number in the family
-│   └── system_stm32g4xx.h   # System/clock initialization declarations
-├── Source                   # System initialization sources (system_stm32g4xx.c, startup files)
-└── License.md
-```
+It is **crucial** that you use a consistent set of versions for the CMSIS Core - CMSIS Device, as mentioned in [this](https://htmlpreview.github.io/?https://github.com/STMicroelectronics/STM32CubeH5/blob/main/Release_Notes.html) release note.
 
-*(File names above are the actual `STM32G4` family branch contents; other family branches follow the same `Include`/`Source` layout with their own family's headers, e.g. `stm32u5xx.h`.)*
+The full **STM32CubeH5** MCU package is available [here](https://github.com/STMicroelectronics/STM32CubeH5).
 
----
+## Troubleshooting
 
-## Usage
+If you have any issue with the software content of this repository, you can file an issue [here](https://github.com/STMicroelectronics/cmsis_device_h5/issues/new).
 
-This repository is not built as a standalone CMake project when used as a submodule of `Bsp-Ral` — it only supplies headers. `Bsp-Ral`'s `CMakeLists.txt` adds `CMSIS_ST/Include` to both of its library targets (`HAL_LL_Lib` and `Ral_Lib`):
-
-```cmake
-target_include_directories(Ral_Lib
-    PUBLIC
-        ...
-        ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS_ST/Include  # ST CMSIS Device files
-)
-```
-
-The parent build (`Build.cmake`) additionally parses the family dispatcher header (e.g. `stm32g4xx.h`) at configure time, extracting its `#if/#elif defined(STM32...)` chain to resolve the exact device define (e.g. `STM32G411xB`) for the target part number — so a part number missing from this header fails the CMake configure step with a clear error rather than a wall of downstream compiler errors.
-
----
-
-## Useful Links
-
-| Resource | Link |
-|---|---|
-| Upstream repository (family-specific) | https://github.com/STMicroelectronics/cmsis-device-g4 |
-| STM32Cube MCU packages overview | https://github.com/STMicroelectronics |
-| Parent repository | https://github.com/Embedbits/Bsp-Ral |
-| License | [`License.md`](License.md) |
-
----
-
-## License
-
-Distributed under the terms in [`License.md`](License.md), unchanged from the upstream STMicroelectronics CMSIS device package.
+For any other question related to the product, the tools, the environment, you can submit a topic on the [ST Community/STM32 MCUs forum](https://community.st.com/s/group/0F90X000000AXsASAW/stm32-mcus).
