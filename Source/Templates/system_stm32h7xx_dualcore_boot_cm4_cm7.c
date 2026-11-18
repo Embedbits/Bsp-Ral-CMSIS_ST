@@ -88,8 +88,8 @@
 /* Note: Following vector table addresses must be defined in line with linker
          configuration. */
 /*!< Uncomment the following line if you need to relocate the vector table
-     anywhere in FLASH BANK1 or AXI SRAM, else the vector table is kept at the automatic
-     remap of boot address selected */
+     anywhere in FLASH or AXI SRAM, else it will be located at the base address
+     of the FLASH BANK1. */
 /* #define USER_VECT_TAB_ADDRESS */
 
 #if defined(USER_VECT_TAB_ADDRESS)
@@ -266,6 +266,8 @@ void SystemInit (void)
   /* Configure the Vector Table location add offset address for cortex-M4 ------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal D2 AXI-RAM or in Internal FLASH */
+#else
+  SCB->VTOR = FLASH_BANK1_BASE; /* Default Vector Table Location at the base address of Internal FLASH BANK1 */
 #endif /* USER_VECT_TAB_ADDRESS */
 
 #elif defined(CORE_CM7)
@@ -288,6 +290,8 @@ void SystemInit (void)
   /* Configure the Vector Table location -------------------------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal D1 AXI-RAM or in Internal FLASH */
+#else
+  SCB->VTOR = FLASH_BANK1_BASE; /* Default Vector Table Location at the base address of Internal FLASH BANK1 */
 #endif /* USER_VECT_TAB_ADDRESS */
 
 #else
